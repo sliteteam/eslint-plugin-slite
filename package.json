@@ -4,6 +4,11 @@
   "description": "A set of rules used for code linting at @Slite",
   "main": "index.js",
   "license": "MIT",
+  "author": "Slite Inc.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sliteteam/eslint-plugin-slite.git"
+  },
   "scripts": {
     "lint": "eslint lib/ index.js",
     "test": "jest tests/"
