@@ -1,0 +1,27 @@
+{
+  "name": "eslint-plugin-slite",
+  "version": "0.0.1",
+  "description": "A set of rules used for code linting at @Slite",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint lib/ index.js",
+    "test": "jest tests/"
+  },
+  "devDependencies": {
+    "eslint": "^7.23.0",
+    "jest": "^26.6.3"
+  },
+  "jest": {
+    "projects": [
+      {
+        "displayName": "test",
+        "roots": [
+          "."
+        ],
+        "testRegex": "/tests/lib/rules/.+\\.js$",
+        "testEnvironment": "node"
+      }
+    ]
+  }
+}
