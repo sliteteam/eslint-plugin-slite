@@ -30,5 +30,9 @@ ruleTester.run("no-unchecked-drop-migrations", rule, {
       code: `queryInterface.dropTable('table', 'column')`,
       errors,
     },
+    {
+      code: `queryInterface.renameColumn('whatever')`,
+      errors,
+    },
   ],
 });
