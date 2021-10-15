@@ -4,5 +4,6 @@ module.exports = {
     "no-insecure-window-open": require("./lib/rules/no-insecure-window-open"),
     "no-mutable-constant-object": require("./lib/rules/no-mutable-constant-object"),
     "no-unchecked-drop-migrations": require("./lib/rules/no-unchecked-drop-migrations"),
+    "api-avoid-dangerous-promises": require("./lib/rules/api-avoid-dangerous-promises"),
   },
 };
