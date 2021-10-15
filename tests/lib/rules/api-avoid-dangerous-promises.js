@@ -1,4 +1,4 @@
-const rule = require("../../../lib/rules/api-avoid-promise-all");
+const rule = require("../../../lib/rules/api-avoid-dangerous-promises");
 
 async function invalidFunction() {
   return await Promise.all([]);
@@ -18,7 +18,7 @@ const errors = [
   },
 ];
 
-ruleTester.run("api-avoid-promise-all", rule, {
+ruleTester.run("api-avoid-dangerous-promises", rule, {
   valid: [
     {
       filename: "app/src/repositories/foobar.js",
