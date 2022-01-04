@@ -9,7 +9,7 @@ const ruleTester = new RuleTester({
 ruleTester.run("api-ensure-create-slite-context-correctness", rule, {
   valid: [
     {
-      filename: "api/src/repositories/foobar.js",
+      filename: "api/src/repositories/system-test-context.ts",
       code: `
 export const SystemTestContext = createSliteContext(
   { type: SliteContextType.SYSTEM },
@@ -22,7 +22,7 @@ export const SystemTestContext = createSliteContext(
   ],
   invalid: [
     {
-      filename: "api/src/repositories/foobar.js",
+      filename: "api/src/repositories/system-test-context.ts",
       code: `
         const SystemTestContext = createSliteContext(
           { type: SliteContextType.SYSTEM },
@@ -34,7 +34,7 @@ export const SystemTestContext = createSliteContext(
       errors: [{ message: rule.errors.mustBeExported }],
     },
     {
-      filename: "api/src/repositories/foobar.js",
+      filename: "api/src/repositories/i-am-a-table.ts",
       code: `
         export const Foobar = createSliteContext(
           { type: SliteContextType.SYSTEM },
@@ -43,7 +43,11 @@ export const SystemTestContext = createSliteContext(
           }
         )
         `,
-      errors: [{ message: rule.errors.mustHaveSameNameAsCallback }],
+      errors: [
+        { message: rule.errors.mustExportSameType },
+        { message: rule.errors.mustHaveMatchingFilename },
+        { message: rule.errors.mustHaveSameNameAsCallback },
+      ],
     },
   ],
 });
