@@ -11,24 +11,27 @@ ruleTester.run("api-ensure-create-slite-context-correctness", rule, {
     {
       filename: "api/src/repositories/system-test-context.ts",
       code: `
-export const SystemTestContext = createSliteContext(
-  { type: SliteContextType.SYSTEM },
-  async function SystemTestContext(_, input) {
-    return input.n
-  }
-)
-`,
+    async function SystemTestContextCallback(_, input) {
+      return input.n
+    }
+    export const SystemTestContext = createSliteContext(
+      { type: SliteContextType.SYSTEM },
+      SystemTestContextCallback
+    )
+    `,
     },
   ],
   invalid: [
     {
       filename: "api/src/repositories/system-test-context.ts",
       code: `
+        async function SystemTestContextCallback(_, input) {
+          return input.n
+        }
+
         const SystemTestContext = createSliteContext(
           { type: SliteContextType.SYSTEM },
-          async function SystemTestContext(_, input) {
-            return input.n
-          }
+    	  SystemTestContextCallback
         )
         `,
       errors: [{ message: rule.errors.mustBeExported }],
@@ -36,17 +39,33 @@ export const SystemTestContext = createSliteContext(
     {
       filename: "api/src/repositories/i-am-a-table.ts",
       code: `
+        async function SystemTestContext(_, input) {
+          return input.n
+        }
+
         export const Foobar = createSliteContext(
           { type: SliteContextType.SYSTEM },
-          async function SystemTestContext(_, input) {
-            return input.n
-          }
+          SystemTestContext
         )
         `,
       errors: [
         { message: rule.errors.mustExportSameType },
         { message: rule.errors.mustHaveMatchingFilename },
-        { message: rule.errors.mustHaveSameNameAsCallback },
+        { message: rule.errors.mustHaveACallbackName },
+      ],
+    },
+    {
+      filename: "api/src/repositories/system-test-context.ts",
+      code: `
+      export const SystemTestContext = createSliteContext(
+        { type: SliteContextType.SYSTEM },
+        async function SystemTestContextCallback(_, input) {
+          return input.n
+        }
+      )`,
+      errors: [
+        { message: rule.errors.mustDefineCallbackOutsideOfWrapper },
+        { message: rule.errors.mustHaveACallbackName },
       ],
     },
   ],
