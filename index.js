@@ -6,5 +6,6 @@ module.exports = {
     "no-unchecked-drop-migrations": require("./lib/rules/no-unchecked-drop-migrations"),
     "api-avoid-dangerous-promises": require("./lib/rules/api-avoid-dangerous-promises"),
     "api-ensure-create-slite-context-correctness": require("./lib/rules/api-ensure-create-slite-context-correctness"),
+    "api-ensure-repositories-are-scoped-by-organizationId": require("./lib/rules/api-ensure-repositories-are-scoped-by-organizationId"),
   },
 };
