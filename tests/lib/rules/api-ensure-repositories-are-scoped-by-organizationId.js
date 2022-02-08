@@ -4,16 +4,6 @@ const ruleTester = new RuleTester({
   parserOptions: { ecmaVersion: 10, sourceType: "module" },
 });
 
-const errorFindByPk = {
-  message:
-      `findByPk should be used with extra care as it opens code to direct object access.
-You should consider using findOne({where: {id, organizationId}}) instead (and add the more context you can like organizationId)`,
-}
-
-const errorFindOne = {
-  message: `findOne should somehow use organizationId to scope the query to the organization.`,
-}
-
 ruleTester.run("ensure-repository-has-context", rule, {
   valid: [
     { 
@@ -44,13 +34,13 @@ ruleTester.run("ensure-repository-has-context", rule, {
     { code: `
         PGNote.findByPk(noteId, { transaction })
       `,
-      errors: [errorFindByPk]
+      errors: [rule.errors.findByPk]
     },
     { 
       code: `
         PGNote.findOne({ transaction, where: {noteId} })
       `,
-      errors: [errorFindOne]
+      errors: [rule.errors.findOne]
     },
     {
       code: `
@@ -60,7 +50,7 @@ ruleTester.run("ensure-repository-has-context", rule, {
           include: [{ model: PGNote, required: true }],
         })
       `,
-      errors: [errorFindOne]
+      errors: [rule.errors.findOne]
     }
   ],
 });
