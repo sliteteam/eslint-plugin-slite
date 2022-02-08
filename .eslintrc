@@ -1,0 +1,14 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 9,
+    "sourceType": "module"
+  },
+  "env": {
+    "jest": true,
+    "node": true,
+    "jasmine": true
+  },
+  "rules": {
+    "no-debugger": "error"
+  }
+}
