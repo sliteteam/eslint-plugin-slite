@@ -29,6 +29,47 @@ ruleTester.run("ensure-repository-has-context", rule, {
         });
       `
     },
+    { code:`
+      PGDiscussionReply.findOne({
+        where: {
+          id: replyId,
+        },
+        transaction,
+        include: [
+          {
+            model: PGThread,
+            required: true,
+            include: [
+              {
+                model: PGNote,
+                where: { organizationId },
+                attributes: [],
+                required: true,
+              },
+            ],
+          },
+        ],
+      })
+    `},
+    { code:`
+      PGDiscussionReply.findAll({
+        transaction,
+        include: [
+          {
+            model: PGThread,
+            required: true,
+            include: [
+              {
+                model: PGNote,
+                where: { organizationId },
+                attributes: [],
+                required: true,
+              },
+            ],
+          },
+        ],
+      })
+    `}
   ],
   invalid: [
     { code: `
@@ -40,7 +81,7 @@ ruleTester.run("ensure-repository-has-context", rule, {
       code: `
         PGNote.findOne({ transaction, where: {noteId} })
       `,
-      errors: [rule.errors.findOne]
+      errors: [rule.errors.findOneAll]
     },
     {
       code: `
@@ -50,7 +91,7 @@ ruleTester.run("ensure-repository-has-context", rule, {
           include: [{ model: PGNote, required: true }],
         })
       `,
-      errors: [rule.errors.findOne]
+      errors: [rule.errors.findOneAll]
     }
   ],
 });
