@@ -7,5 +7,6 @@ module.exports = {
     "api-avoid-dangerous-promises": require("./lib/rules/api-avoid-dangerous-promises"),
     "api-ensure-create-slite-context-correctness": require("./lib/rules/api-ensure-create-slite-context-correctness"),
     "api-ensure-repositories-are-scoped-by-organizationId": require("./lib/rules/api-ensure-repositories-are-scoped-by-organizationId"),
+    "no-functional-editor-variant-check": require("./lib/rules/no-functional-editor-variant-check"),
   },
 };
