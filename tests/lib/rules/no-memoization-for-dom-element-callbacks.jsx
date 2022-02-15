@@ -3,7 +3,7 @@ const rule = require("../../../lib/rules/no-memoization-for-dom-element-callback
 const ValidComponentWithoutMemo = `
   const MyComponent = () => {
     const handleClick = (event) => {
-      event.preventDefault
+      event.preventDefault()
     }
     return (
       <div
@@ -17,7 +17,7 @@ const ValidComponentWithInlineFunction = `
   const MyComponent = () => {
     return (
       <div
-        onClick={(event) => event.preventDefault}
+        onClick={(event) => event.preventDefault()}
       />
     )
   }
@@ -26,7 +26,7 @@ const ValidComponentWithInlineFunction = `
 const ValidComponentWithMixedUses = `
   const MyComponent = () => {
     const handleClick = React.useCallback((event) => {
-      event.preventDefault
+      event.preventDefault()
     }, [])
     return (
       <div>
@@ -34,6 +34,40 @@ const ValidComponentWithMixedUses = `
           onClick={handleClick}
         />
         <div onClick={handleClick} />
+      </div>
+    )
+  }
+`
+
+const ValidComponentWithDependentUses = `
+  const MyComponent = ({ foo }) => {
+    const handleClick = React.useCallback(() => {
+      foo()
+    }, [ foo ])
+
+    // this uses the above as a dependency
+    useEffect(() => handleClick(), [ handleClick ])
+
+    return (
+      <div>
+        <div onClick={handleClick} />
+      </div>
+    )
+  }
+`
+
+const ValidComponentWithOtherDependentUses = `
+  const MyComponent = ({ foo }) => {
+    const handleClick = React.useCallback(() => {
+      foo()
+    }, [ foo ])
+
+    // supplied to another hook
+    const attributes = useMyCustomHook({ foo, click: handleClick })
+
+    return (
+      <div>
+        <div onClick={handleClick} { ...attributes } />
       </div>
     )
   }
@@ -55,7 +89,7 @@ const MyComponent = () => {
 const InvalidComponentWithMemo = `
   const MyComponent = () => {
     const handleClick = React.useCallback((event) => {
-      event.preventDefault
+      event.preventDefault()
     }, [])
     return (
       <div
@@ -68,7 +102,7 @@ const InvalidComponentWithMemo = `
 const InvalidComponentWithMemoAlt = `
   const MyComponent = () => {
     const handleClick = useCallback((event) => {
-      event.preventDefault
+      event.preventDefault()
     }, [])
     return (
       <div
@@ -98,6 +132,12 @@ ruleTester.run("no-memoization-for-dom-element-callbacks", rule, {
     },
     {
       code: ValidComponentWithMixedUses,
+    },
+    {
+      code: ValidComponentWithDependentUses
+    },
+    {
+      code: ValidComponentWithOtherDependentUses,
     },
     {
       code: ValidComponentWithRef,
