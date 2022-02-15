@@ -39,6 +39,19 @@ const ValidComponentWithMixedUses = `
   }
 `
 
+const ValidComponentWithRef = `
+const MyComponent = () => {
+  const refCallback = useCallback((element) => {
+    element.focus()
+  }, [])
+  return (
+    <div
+      ref={refCallback}
+    />
+  )
+}
+`
+
 const InvalidComponentWithMemo = `
   const MyComponent = () => {
     const handleClick = React.useCallback((event) => {
@@ -85,6 +98,9 @@ ruleTester.run("no-memoization-for-dom-element-callbacks", rule, {
     },
     {
       code: ValidComponentWithMixedUses,
+    },
+    {
+      code: ValidComponentWithRef,
     }
   ],
   invalid: [
