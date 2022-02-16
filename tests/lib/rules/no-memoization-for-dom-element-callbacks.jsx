@@ -74,16 +74,16 @@ const ValidComponentWithOtherDependentUses = `
 `
 
 const ValidComponentWithRef = `
-const MyComponent = () => {
-  const refCallback = useCallback((element) => {
-    element.focus()
-  }, [])
-  return (
-    <div
-      ref={refCallback}
-    />
-  )
-}
+  const MyComponent = () => {
+    const refCallback = useCallback((element) => {
+      element.focus()
+    }, [])
+    return (
+      <div
+        ref={refCallback}
+      />
+    )
+  }
 `
 
 const InvalidComponentWithMemo = `
