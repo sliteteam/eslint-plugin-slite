@@ -24,7 +24,7 @@
         "roots": [
           "."
         ],
-        "testRegex": "/tests/lib/rules/.+\\.js$",
+        "testRegex": "/tests/lib/rules/.+\\.jsx?$",
         "testEnvironment": "node"
       }
     ]
