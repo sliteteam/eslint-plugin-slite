@@ -9,5 +9,6 @@ module.exports = {
     "api-ensure-repositories-are-scoped-by-organizationId": require("./lib/rules/api-ensure-repositories-are-scoped-by-organizationId"),
     "no-functional-editor-variant-check": require("./lib/rules/no-functional-editor-variant-check"),
     "no-memoization-for-dom-element-callbacks": require("./lib/rules/no-memoization-for-dom-element-callbacks"),
+    "api-file-scoped-unique-id": require("./lib/rules/api-file-scoped-unique-id"),
   },
 };
