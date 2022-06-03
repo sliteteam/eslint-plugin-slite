@@ -20,6 +20,32 @@ ruleTester.run("api-ensure-create-slite-context-correctness", rule, {
     )
     `,
     },
+    {
+      filename: "api/src/repositories/user-test-context.ts",
+      code: `
+    async function UserTestContextCallback(_, input) {
+      return input.n
+    }
+    export const UserTestContext = createSliteContext(
+      { type: SliteContextType.USER },
+      UserTestContextCallback
+    )
+    `,
+    },
+    {
+      filename:
+        "api/src/repositories/public-sharing-gets-collection-public-notes-connection.ts",
+      code: `
+    async function PublicSharingGetsCollectionPublicNotesConnectionCallback() {
+      return input.n
+    }
+
+    export const PublicSharingGetsCollectionPublicNotesConnection = createSliteContext(
+      { type: SliteContextType.PUBLIC_SHARING },
+         PublicSharingGetsCollectionPublicNotesConnectionCallback
+    )
+    `,
+    },
   ],
   invalid: [
     {
@@ -28,7 +54,6 @@ ruleTester.run("api-ensure-create-slite-context-correctness", rule, {
         async function SystemTestContextCallback(_, input) {
           return input.n
         }
-
         const SystemTestContext = createSliteContext(
           { type: SliteContextType.SYSTEM },
     	  SystemTestContextCallback
@@ -42,7 +67,6 @@ ruleTester.run("api-ensure-create-slite-context-correctness", rule, {
         async function SystemTestContext(_, input) {
           return input.n
         }
-
         export const Foobar = createSliteContext(
           { type: SliteContextType.SYSTEM },
           SystemTestContext
