@@ -10,5 +10,6 @@ module.exports = {
     "no-functional-editor-variant-check": require("./lib/rules/no-functional-editor-variant-check"),
     "no-memoization-for-dom-element-callbacks": require("./lib/rules/no-memoization-for-dom-element-callbacks"),
     "api-unique-debugging-id": require("./lib/rules/api-unique-debugging-id"),
+    "api-ensure-transaction-is-passed-to-sequelize": require("./lib/rules/api-ensure-transaction-is-passed-to-sequelize"),
   },
 };
