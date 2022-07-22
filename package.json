@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-slite",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "description": "A set of rules used for code linting at @Slite",
   "main": "index.js",
   "license": "MIT",
