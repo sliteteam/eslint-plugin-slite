@@ -11,5 +11,7 @@ module.exports = {
     "no-memoization-for-dom-element-callbacks": require("./lib/rules/no-memoization-for-dom-element-callbacks"),
     "api-unique-debugging-id": require("./lib/rules/api-unique-debugging-id"),
     "api-ensure-transaction-is-passed-to-sequelize": require("./lib/rules/api-ensure-transaction-is-passed-to-sequelize"),
+    "api-avoid-empty-permissions-asserters": require("./lib/rules/api-avoid-empty-permissions-asserters"),
+    "api-avoid-unsafe-function": require("./lib/rules/api-avoid-unsafe-function"),
   },
 };
