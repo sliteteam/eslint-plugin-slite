@@ -13,5 +13,6 @@ module.exports = {
     "api-ensure-transaction-is-passed-to-sequelize": require("./lib/rules/api-ensure-transaction-is-passed-to-sequelize"),
     "api-avoid-empty-permissions-asserters": require("./lib/rules/api-avoid-empty-permissions-asserters"),
     "api-avoid-unsafe-function": require("./lib/rules/api-avoid-unsafe-function"),
+    "api-enforce-create-slite-context-usage": require("./lib/rules/api-enforce-create-slite-context-usage"),
   },
 };
