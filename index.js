@@ -14,5 +14,6 @@ module.exports = {
     "api-avoid-empty-permissions-asserters": require("./lib/rules/api-avoid-empty-permissions-asserters"),
     "api-avoid-unsafe-function": require("./lib/rules/api-avoid-unsafe-function"),
     "api-enforce-create-slite-context-usage": require("./lib/rules/api-enforce-create-slite-context-usage"),
+    "api-no-assignment-from-asserters": require("./lib/rules/api-no-assignment-from-asserters"),
   },
 };
