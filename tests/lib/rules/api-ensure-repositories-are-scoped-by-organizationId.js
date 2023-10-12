@@ -69,9 +69,39 @@ ruleTester.run("ensure-repository-has-context", rule, {
           },
         ],
       })
-    `}
+    `},
+    {code: `
+    async function context() {
+      paginateFindAll(
+        services,
+        PGSyncedTiles,
+        {
+          where: {
+            remoteId,
+            organizationId,
+          },
+          transaction: services.transaction,
+        }
+      )
+    }`}
   ],
   invalid: [
+    {code: `
+    async function context() {
+      paginateFindAll(
+        services,
+        PGSyncedTiles,
+        {
+          where: {
+            remoteId,
+          },
+          transaction: services.transaction,
+        }
+      )
+    }
+    `,
+    errors: [rule.errors.findOneAll]
+    },
     { code: `
         PGNote.findByPk(noteId, { transaction })
       `,
